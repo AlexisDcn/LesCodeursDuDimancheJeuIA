@@ -1,28 +1,64 @@
 import streamlit as st
 from cluedo_agent import CluedoAgent
-from game_logic import initialize_game
+from game_logic import initialize_game, update_game_state, make_move, give_hint
 from konami_code import check_konami_code, on_key
 
-st.title("Cluedo: Mystère des Océans")
-
+# Initialisation de l'agent IA
 agent = CluedoAgent()
 
+# Menu de navigation dans la barre latérale
 st.sidebar.title("Menu")
 st.sidebar.write("Utilisez ce menu pour naviguer dans le jeu.")
 
+menu_options = ["Accueil", "Jouer", "Aide"]
+selected_menu = st.sidebar.selectbox("Aller à", menu_options)
+
+# Initialisation de l'état du jeu
 if 'game_state' not in st.session_state:
     st.session_state.game_state = initialize_game()
 
-st.write("Bienvenue dans le jeu Cluedo: Mystère des Océans!")
+# Page d'accueil
+if selected_menu == "Accueil":
+    st.title("Cluedo: Mystère des Océans")
+    st.write("Bienvenue dans le jeu Cluedo: Mystère des Océans!")
+    st.write("Utilisez le menu pour naviguer et commencer à jouer.")
 
-player_question = st.text_input("Posez une question à l'agent IA:")
-if st.button("Obtenir un indice"):
-    hint = agent.give_hint(player_question)
-    st.write(hint)
+# Page de jeu
+elif selected_menu == "Jouer":
+    st.title("Cluedo: Mystère des Océans - Jouer")
 
-if st.button("Faire un mouvement"):
-    move = agent.make_move(st.session_state.game_state)
-    st.write(move)
+    st.write("Bienvenue dans le jeu Cluedo: Mystère des Océans!")
 
-st.write("Appuyez sur les touches pour activer le Konami Code.")
-st.text_input("", key="key_input", on_change=on_key)
+    player_question = st.text_input("Posez une question à l'agent IA:")
+    if st.button("Obtenir une réponse"):
+        response = agent.ask_question(player_question)
+        st.write(response)
+
+    location = st.selectbox("Choisissez un lieu pour vous déplacer:", st.session_state.game_state['locations'])
+    if st.button("Déplacer"):
+        move = make_move(st.session_state.game_state, 'move', location=location)
+        st.session_state.game_state = update_game_state(st.session_state.game_state, move)
+        st.write(f"Vous vous êtes déplacé vers {location}.")
+
+    suspect = st.selectbox("Choisissez un suspect:", st.session_state.game_state['suspects'])
+    weapon = st.selectbox("Choisissez une arme:", st.session_state.game_state['weapons'])
+    location = st.selectbox("Choisissez un lieu:", st.session_state.game_state['locations'])
+    if st.button("Faire une accusation"):
+        move = make_move(st.session_state.game_state, 'accusation', suspect=suspect, weapon=weapon, location=location)
+        st.session_state.game_state = update_game_state(st.session_state.game_state, move)
+        if 'winner' in st.session_state.game_state:
+            st.write(f"Félicitations, {st.session_state.game_state['winner']}! Vous avez résolu le mystère!")
+        else:
+            st.write("Votre accusation est incorrecte. Essayez encore.")
+
+    st.write("Appuyez sur les touches pour activer le Konami Code.")
+    key_input = st.text_input("", key="key_input", on_change=lambda: on_key(st.session_state.key_input, st.session_state.game_state))
+
+# Page d'aide
+elif selected_menu == "Aide":
+    st.title("Cluedo: Mystère des Océans - Aide")
+    st.write("## Comment jouer")
+    st.write("- Posez des questions à l'agent IA pour obtenir des indices.")
+    st.write("- Faites des mouvements pour résoudre le mystère.")
+    st.write("## Konami Code")
+    st.write("- Pour activer le Konami Code, appuyez sur les touches suivantes dans cet ordre: e, z, espace, w, i, n.")
