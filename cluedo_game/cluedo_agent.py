@@ -9,8 +9,8 @@ class CluedoAgent:
             'weapons': ['Filet de pêche', 'Harpon', 'Bouteille de plastique'],
             'locations': ['Récif de corail', 'Épave de navire', 'Plage polluée']
         }
-        self.api_url = "http://localhost:11435/api/generate"  # Remplacez par l'URL de votre API Ollama
-        self.api_key = "votre_cle_api_fictive"  # Remplacez par une clé API fictive pour le développement
+        self.api_url = "http://127.0.0.1:11435/api/generate"  # Remplacez par l'URL de votre API Ollama
+        self.api_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBhFGJ1X36XUGvFhWiuBmOej9cxAt1p+fooqXJ+9rjWs"  # Remplacez par votre clé API
 
     def give_hint(self, game_state):
         hints = [

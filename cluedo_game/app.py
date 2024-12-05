@@ -55,8 +55,15 @@ elif selected_menu == "Jouer":
         else:
             st.write("Votre accusation est incorrecte. Essayez encore.")
 
-    st.write("Appuyez sur les touches pour activer le Konami Code.")
-    key_input = st.text_input("", key="key_input", on_change=lambda: on_key(st.session_state.key_input))
+    # Capturer les entrées de l'utilisateur pour le Konami Code
+    key_input = st.text_input("Appuyez sur les touches pour activer le Konami Code:", key="key_input")
+    if key_input:
+        st.session_state.key_sequence.append(key_input[-1])  # Ajouter la dernière touche entrée
+        if len(st.session_state.key_sequence) > 6:  # La séquence du Konami Code a 6 touches
+            st.session_state.key_sequence.pop(0)  # Supprimer la première touche si la séquence est trop longue
+        if on_key(st.session_state.key_sequence):
+            st.write("Konami Code activé! Fonctionnalité spéciale débloquée.")
+            st.session_state.key_sequence = []  # Réinitialiser la séquence après activation
 
 # Page d'aide
 elif selected_menu == "Aide":
