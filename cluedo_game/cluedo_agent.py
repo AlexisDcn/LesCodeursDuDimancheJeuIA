@@ -10,9 +10,7 @@ class CluedoAgent:
             'locations': ['Récif de corail', 'Épave de navire', 'Plage polluée']
         }
         self.api_url = "http://localhost:11435/api/generate"  # Remplacez par l'URL de votre API Ollama
-        self.api_key_path = r"C:\Users\adechena\.ollama\id_ed25519.pub"
-        with open(self.api_key_path, 'r') as file:
-            self.api_key = file.read().strip()
+        self.api_key = "votre_cle_api_fictive"  # Remplacez par une clé API fictive pour le développement
 
     def give_hint(self, game_state):
         hints = [
