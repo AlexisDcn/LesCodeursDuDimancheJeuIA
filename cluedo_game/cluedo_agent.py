@@ -1,5 +1,6 @@
 import os
 import requests
+import random
 
 class CluedoAgent:
     def __init__(self):
@@ -9,7 +10,7 @@ class CluedoAgent:
             'locations': ['Récif de corail', 'Épave de navire', 'Plage polluée']
         }
         self.api_url = "http://localhost:11435/api/generate"  # Remplacez par l'URL de votre API Ollama
-        self.api_key_path = os.path.expandvars(r"C:\Users\<username>\.ollama\id_ed25519.pub")
+        self.api_key_path = r"C:\Users\adechena\.ollama\id_ed25519.pub"
         with open(self.api_key_path, 'r') as file:
             self.api_key = file.read().strip()
 
@@ -50,6 +51,6 @@ class CluedoAgent:
         }
         response = requests.post(self.api_url, headers=headers, json=data)
         if response.status_code == 200:
-            return response.json()['response']
+            return response.json().get('response', "Désolé, je n'ai pas pu comprendre votre question.")
         else:
             return "Désolé, je n'ai pas pu comprendre votre question."
