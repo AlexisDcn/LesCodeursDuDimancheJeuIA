@@ -6,16 +6,20 @@ from konami_code import check_konami_code, on_key
 # Initialisation de l'agent IA
 agent = CluedoAgent()
 
+# Initialisation de l'état du jeu
+if 'game_state' not in st.session_state:
+    st.session_state.game_state = initialize_game()
+
+# Initialisation de l'état du Konami Code
+if 'konami_activated' not in st.session_state:
+    st.session_state.konami_activated = False
+
 # Menu de navigation dans la barre latérale
 st.sidebar.title("Menu")
 st.sidebar.write("Utilisez ce menu pour naviguer dans le jeu.")
 
 menu_options = ["Accueil", "Jouer", "Aide"]
 selected_menu = st.sidebar.selectbox("Aller à", menu_options)
-
-# Initialisation de l'état du jeu
-if 'game_state' not in st.session_state:
-    st.session_state.game_state = initialize_game()
 
 # Page d'accueil
 if selected_menu == "Accueil":
@@ -52,7 +56,7 @@ elif selected_menu == "Jouer":
             st.write("Votre accusation est incorrecte. Essayez encore.")
 
     st.write("Appuyez sur les touches pour activer le Konami Code.")
-    key_input = st.text_input("", key="key_input", on_change=lambda: on_key(st.session_state.key_input, st.session_state.game_state))
+    key_input = st.text_input("", key="key_input", on_change=lambda: on_key(st.session_state.key_input))
 
 # Page d'aide
 elif selected_menu == "Aide":

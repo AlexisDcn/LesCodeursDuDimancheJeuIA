@@ -8,7 +8,9 @@ key_sequence = []
 
 def on_key(key):
     key_sequence.append(key)
+    if len(key_sequence) > len(konami_code):
+        key_sequence.pop(0)  # Supprimer la première touche si la séquence est trop longue
     if check_konami_code(key_sequence):
+        st.session_state.konami_activated = True
         st.write("Konami Code activé! Fonctionnalité spéciale débloquée.")
-        # Réinitialiser la séquence après activation
-        key_sequence.clear()
+        key_sequence.clear()  # Réinitialiser la séquence après activation
