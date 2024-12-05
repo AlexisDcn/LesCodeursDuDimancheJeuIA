@@ -1,6 +1,6 @@
 import streamlit as st
 
-# Définir la séquence du Konami Code comme une variable globale
+# Définir la séquence du Konami Code
 konami_code = ['e', 'z', ' ', 'w', 'i', 'n']
 key_sequence = []
 
