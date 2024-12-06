@@ -12,3 +12,6 @@ Ce projet est un jeu Cluedo adapté pour la Nuit de l'Info, avec un thème sur l
 
 ## Jouer
 Pour jouer, il suffit d'executer cette commande : streamlit run app.py
+
+## Doc
+Bon, le code est généré mais c'était un bon exercice pour moi, vous pouvez le trouver sur ce repository gitHub : https://github.com/AlexisDcn/LesCodeursDuDimancheJeuIA.git
