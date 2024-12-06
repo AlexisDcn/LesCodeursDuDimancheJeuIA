@@ -86,3 +86,4 @@ elif selected_menu == "Aide":
     st.markdown("## Konami Code")
     st.markdown("- Pour activer le Konami Code, cliquez rapidement 5 fois sur le bouton **\"MENU\"** dans la barre latérale. **fonctionnel**")
     st.markdown("- Une fois activé, vous débloquerez une fonctionnalité spéciale qui révèlera le coupable. **fonctionnel**")
+    st.markdown("Voici le repository gitHub de ce projet: https://github.com/AlexisDcn/LesCodeursDuDimancheJeuIA.git")
