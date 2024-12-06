@@ -13,6 +13,8 @@ if 'game_state' not in st.session_state:
 # Initialisation de l'état du Konami Code
 if 'konami_activated' not in st.session_state:
     st.session_state.konami_activated = False
+if 'key_sequence' not in st.session_state:
+    st.session_state.key_sequence = []
 
 # Menu de navigation dans la barre latérale
 st.sidebar.title("Menu")
