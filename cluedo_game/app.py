@@ -78,8 +78,11 @@ elif selected_menu == "Jouer":
 # Page d'aide
 elif selected_menu == "Aide":
     st.title("Cluedo: Mystère des Océans - Aide")
-    st.write("## Comment jouer")
-    st.write("- Posez des questions à l'agent IA pour obtenir des indices.")
-    st.write("- Faites des mouvements pour résoudre le mystère.")
-    st.write("## Konami Code")
-    st.write("- Cliquez cinq fois rapidement sur le bouton 'MENU' dans la barre latérale pour activer le Konami Code.")
+
+    st.markdown("## Comment jouer")
+    st.markdown("- Posez des questions à l'agent IA pour obtenir des indices. **Pas fonctionnel**")
+    st.markdown("- Faites des mouvements pour résoudre le mystère. **fonctionnel**")
+
+    st.markdown("## Konami Code")
+    st.markdown("- Pour activer le Konami Code, cliquez rapidement 5 fois sur le bouton **\"MENU\"** dans la barre latérale. **fonctionnel**")
+    st.markdown("- Une fois activé, vous débloquerez une fonctionnalité spéciale qui révèlera le coupable. **fonctionnel**")
