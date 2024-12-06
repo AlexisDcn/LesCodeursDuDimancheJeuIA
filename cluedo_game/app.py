@@ -1,7 +1,7 @@
 import streamlit as st
 from cluedo_agent import CluedoAgent
 from game_logic import initialize_game, update_game_state, make_move, give_hint
-from konami_code import check_konami_code, on_key
+from konami_code import check_konami_code, on_key, reveal_culprit
 
 # Initialisation de l'agent IA
 agent = CluedoAgent()
@@ -66,6 +66,7 @@ elif selected_menu == "Jouer":
         if on_key(st.session_state.key_sequence):
             st.session_state.konami_activated = True
             st.write("Konami Code activé! Fonctionnalité spéciale débloquée.")
+            st.write(reveal_culprit(st.session_state.game_state))  # Révéler le coupable
             st.session_state.key_sequence = []  # Réinitialiser la séquence après activation
 
 # Page d'aide
